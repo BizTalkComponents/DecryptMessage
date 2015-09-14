@@ -68,7 +68,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Src\BizTalkComponents.PipelineComponents.DecryptMessage.csproj">
+    <ProjectReference Include="..\..\Src\DecryptMessage\BizTalkComponents.PipelineComponents.DecryptMessage.csproj">
       <Project>{0a25e737-4b66-428b-9438-b26778c7a9c1}</Project>
       <Name>BizTalkComponents.PipelineComponents.DecryptMessage</Name>
     </ProjectReference>
