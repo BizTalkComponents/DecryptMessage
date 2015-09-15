@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
-using BizTalkComponents.Utils.LookupUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Winterdom.BizTalk.PipelineTesting;
 
 namespace BizTalkComponents.PipelineComponents.DecryptMessage.Tests.UnitTests
@@ -17,15 +15,13 @@ namespace BizTalkComponents.PipelineComponents.DecryptMessage.Tests.UnitTests
             var keyStr = "AAECAwQFBgcICQoLDA0ODw==";
             var key = Convert.FromBase64String(keyStr);
 
-            var mock = new Mock<ISSOLookupRepository>();
-            mock.Setup(r => r.Read("SSOApplication", "SSOKey")).Returns(keyStr);
+          
 
             var pipeline = PipelineFactory.CreateEmptySendPipeline();
 
-            var em = new DecryptMessage(mock.Object)
+            var em = new DecryptMessage()
             {
-                SSOConfigApplication = "SSOApplication",
-                SSOConfigKey = "SSOKey"
+              EncryptionKey = keyStr
             };
 
             pipeline.AddComponent(em, PipelineStage.Encode);
@@ -54,15 +50,11 @@ namespace BizTalkComponents.PipelineComponents.DecryptMessage.Tests.UnitTests
             var keyStrWrong = "sj38COroD3UbaLS/JobOwHjSfvHKUBgm9XtiRMDgazk=";
             var keyWrong = Convert.FromBase64String(keyStrWrong);
 
-            var mock = new Mock<ISSOLookupRepository>();
-            mock.Setup(r => r.Read("SSOApplication", "SSOKey")).Returns(keyStr);
-
             var pipeline = PipelineFactory.CreateEmptySendPipeline();
 
-            var em = new DecryptMessage(mock.Object)
+            var em = new DecryptMessage()
             {
-                SSOConfigApplication = "SSOApplication",
-                SSOConfigKey = "SSOKey"
+                EncryptionKey = keyStr
             };
 
             pipeline.AddComponent(em, PipelineStage.Encode);
